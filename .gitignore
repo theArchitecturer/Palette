@@ -1,3 +1,11 @@
 .sw?
 .*.sw?
 *.pyc
+**/bin
+**/tests
+pyvenv.cfg
+**/include
+**/lib
+**/__pycache__
+**/.git
+
