@@ -21,9 +21,12 @@ window = {
 
 def _source(name, field):
     plug_dir, _ = os.path.split(os.path.abspath(__file__))
+    _return = []
     with open(os.path.join(plug_dir, 'data', f"{name}.json")) as inFile:
-        data = json.load(inFile)
-        return data[field]
+        data = json.load(inFile)[field]
+        for line in data:
+            _return.append(f"{field}: { line }")
+        return _return
 
 
 palete_opts = {
@@ -32,10 +35,22 @@ palete_opts = {
         'window': window
         }
 
-palete_opts = {
+task_not_found = {
         'source': _source('tasks', 'Tasks'),
         'options': option,
         'window': window,
         'sink': 'PaletteHandle'
         }
 
+# palete_opts = {
+#         'source': 'Build',
+#         'options': [ 
+#             '--header="not found"',
+#             '--layout=reverse',
+#             '--inline-info',
+#             '-m'
+#             ],
+
+#         'window': window,
+#         'sink': 'PaletteHandle'
+#         }

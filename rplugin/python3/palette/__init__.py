@@ -63,9 +63,10 @@ class Simple(object):
     #     if self.taskFile is None:
     #         _file = os.path.join(self.vscodeDir, 'task.json')
     #         self.taskFile = task_json.build_task_json(_file)
-    @neovim.command('PaletteHandle')
+    @neovim.command('PaletteHandle', nargs=1, sync=True)
     def palette_handle(self, arg):
-        self.nvim.command(f"echo {arg.replace(' ', '_')}")
+        if self.taskFile is None:
+            self.nvim.call("fzf#run", fzf.task_not_found)
 
     @neovim.command('Palette')
     def open_command_palete(self):
